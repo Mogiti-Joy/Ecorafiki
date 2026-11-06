@@ -3,3 +3,4 @@ Allow: /
 Disallow: /contact.html
 Disallow: /get-involved.html
 Disallow: /404.html
+Sitemap: https://www.ecorafiky.org/sitemap.xml
