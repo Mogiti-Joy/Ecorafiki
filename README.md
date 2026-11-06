@@ -52,8 +52,15 @@ The header, menu and footer are repeated in every page. If you change one (e.g. 
 ## Contact form
 The form has no server. When someone clicks send, it opens their email app with the message addressed to ecorafikiafrica@gmail.com. To receive messages directly instead, connect it to a free service such as Formspree.
 
+## Hosting and heavy traffic
+The site is static, so it holds up to large crowds (1,000+ people at once) as long as it sits on a host with a CDN. **Cloudflare Pages** is recommended: free, no bandwidth cap, and servers in Nairobi and Mombasa. Netlify also works, but its free plan caps bandwidth at 100 GB a month. Avoid plain shared/cPanel hosting for launches or campaigns: the showreel streams at about 6 Mbps per visitor, which saturates a single server quickly.
+
+The bandwidth is mostly the home page showreel (about 11 MB desktop, 7 MB phone). 1,000 visitors ≈ 7–11 GB.
+
+Caching is set up in `_headers` (Cloudflare Pages, Netlify) and `.htaccess` (Apache/cPanel). CSS, JS and videos are cached for a year, so **whenever you change one, bump its `?v=` number** in every page that links it (e.g. `css/style.css?v=78` → `?v=79`), or visitors keep the old copy.
+
 ## Analytics (Google Analytics 4)
-Open `js/analytics.js` and replace `G-XXXXXXXXXX` with your Measurement ID (Google Analytics > Admin > Data streams > your web stream).
+Open `js/analytics.js` and replace `G-XXXXXXXXXX` with your Measurement ID (Google Analytics > Admin > Data streams > your web stream). Then bump `js/analytics.js?v=1` to `?v=2` in every page.
 Until then nothing is tracked and no cookie banner appears. Once the ID is in:
 - Visitors see a cookie banner and analytics only starts if they press **Accept** (Google Consent Mode).
 - "Cookie settings" in the footer reopens the banner.
