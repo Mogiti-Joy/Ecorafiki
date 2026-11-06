@@ -785,7 +785,7 @@ header.nav.scrolled{box-shadow:0 10px 30px -22px rgba(20,33,23,.5)}
 .dock{display:none}
 @media (max-width:640px){
   body{padding-bottom:calc(68px + env(safe-area-inset-bottom))}
-  .dock{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:45;background:rgba(20,33,23,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:22px;padding:6px;box-shadow:0 18px 40px -16px rgba(0,0,0,.55);transition:transform .35s ease,opacity .3s}
+  .dock{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:45;background:rgba(20,33,23,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:22px;padding:6px;box-shadow:0 18px 40px -16px rgba(0,0,0,.55);transition:transform .35s ease,opacity .3s}
   .dock.away,body.menu-open .dock{transform:translateY(130%);opacity:0}
   .dock a{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px;border-radius:16px;color:rgba(255,255,255,.75);font-size:.7rem;font-weight:700;letter-spacing:.02em;transition:background .2s,color .2s,transform .15s}
   .dock a:active{transform:scale(.92)}
