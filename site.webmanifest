@@ -3,7 +3,7 @@
   "short_name": "EcoRafiky",
   "description": "Restoring Kenya's drylands, feeding its children.",
   "start_url": "index.html",
-  "display": "standalone",
+  "display": "browser",
   "background_color": "#FFFFFF",
   "theme_color": "#244129",
   "icons": [
