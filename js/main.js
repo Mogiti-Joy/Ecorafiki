@@ -21,12 +21,12 @@ menu.insertAdjacentHTML('beforeend', `<div class="menu-extra">
 </div>`);
 
 // Highlight the current page in the menu
-const page = location.pathname.split('/').pop() || 'index.html';
+const page = location.pathname.split('/').pop().replace(/\.html$/, '') || '/';
 menu.querySelectorAll('a:not(.btn)').forEach(a => {
   if (a.getAttribute('href') === page) a.classList.add('active');
 });
-if (['newsroom.html', 'booklets.html'].includes(page)) menu.querySelector('.dd-top').classList.add('active');
-if (page.startsWith('work-')) menu.querySelector('a[href="our-work.html"]').classList.add('active');
+if (['newsroom', 'booklets'].includes(page)) menu.querySelector('.dd-top').classList.add('active');
+if (page.startsWith('work-')) menu.querySelector('a[href="our-work"]').classList.add('active');
 
 // Reveal on scroll
 const io = new IntersectionObserver(entries => {
@@ -131,20 +131,6 @@ document.querySelectorAll('[data-slider]').forEach(slider => {
 const phone = matchMedia('(max-width:640px)');
 const header = document.querySelector('header.nav');
 
-// Bottom action bar
-const icon = d => `<svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="${d}"/></svg>`;
-const dock = document.createElement('nav');
-dock.className = 'dock';
-dock.setAttribute('aria-label', 'Quick actions');
-dock.innerHTML = `
-  <a href="index.html">${icon('M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z')}Home</a>
-  <a href="our-work.html">${icon('M5 21c0-9 5-15 15-16-1 10-7 15-15 16zM5 21l8-8')}Our work</a>
-  <a href="https://wa.me/254719614800"><svg><use href="#i-wa"/></svg>Chat</a>
-  <a href="tel:+254719614800"><svg><use href="#i-phone"/></svg>Call</a>
-  <a href="donate.html" class="give">${icon('M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z')}Donate</a>`;
-dock.querySelectorAll('a').forEach(a => { if (a.getAttribute('href') === page) a.classList.add('on'); });
-document.body.appendChild(dock);
-
 // Header hides while scrolling down and returns on scroll up; progress line tracks the page
 const bar = document.createElement('div');
 bar.className = 'progress';
@@ -155,8 +141,6 @@ const onScroll = () => {
   bar.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
   header.classList.toggle('scrolled', y > 10);
   if (!menu.classList.contains('open')) header.classList.toggle('hide', y > lastY && y > 160);
-  const nearEnd = y > max - 40;
-  dock.classList.toggle('away', nearEnd);
   lastY = y; ticking = false;
 };
 addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });

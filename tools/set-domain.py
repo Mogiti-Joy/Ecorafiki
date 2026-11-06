@@ -22,10 +22,11 @@ os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 SKIP = {'contact.html', 'get-involved.html', '404.html'}
 pages = sorted(f for f in glob.glob('*.html') if f not in SKIP)
 today = datetime.date.today().isoformat()
+page_url = lambda f: site + '/' if f == 'index.html' else f'{site}/{f[:-5]}'  # clean URLs (vercel.json)
 
 for f in pages:
     h = open(f).read()
-    url = site + '/' if f == 'index.html' else f'{site}/{f}'
+    url = page_url(f)
     h = re.sub(r'\n<link rel="canonical" href="[^"]*">', '', h)
     h = re.sub(r'\n<meta property="og:url" content="[^"]*">', '', h)
     h = re.sub(r'(<meta property="og:type" content="website">)',
@@ -41,7 +42,7 @@ for f in pages:
 
 priority = {'index.html': '1.0', 'donate.html': '0.9', 'our-work.html': '0.8', 'nutripop.html': '0.8', 'about.html': '0.8'}
 rows = ''.join(
-    f'  <url><loc>{site + "/" if f == "index.html" else f"{site}/{f}"}</loc><lastmod>{today}</lastmod><priority>{priority.get(f, "0.6")}</priority></url>\n'
+    f'  <url><loc>{page_url(f)}</loc><lastmod>{today}</lastmod><priority>{priority.get(f, "0.6")}</priority></url>\n'
     for f in pages)
 open('sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + rows + '</urlset>\n')
 

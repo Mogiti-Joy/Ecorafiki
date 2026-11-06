@@ -1,6 +1,8 @@
 # EcoRafiky Africa website
 
-Static website, no build step needed. Open `index.html` in a browser to view it, or upload the whole folder to any web host (Netlify, GitHub Pages, cPanel, etc.).
+Static website, no build step needed. It is hosted on Vercel at www.ecorafiky.org.
+
+Pages use clean addresses (`/about`, not `/about.html`; the home page is `/`), set up in `vercel.json`. Old `.html` addresses and `/home` redirect automatically. Internal links are written without `.html`, so preview the site with a local server rather than opening the files directly: `npx serve` in this folder, then open http://localhost:3000.
 
 ## Pages
 | File | Page |
@@ -60,7 +62,7 @@ The bandwidth is mostly the home page showreel (about 11 MB desktop, 7 MB phone)
 Caching is set up in `_headers` (Cloudflare Pages, Netlify) and `.htaccess` (Apache/cPanel). CSS, JS and videos are cached for a year, so **whenever you change one, bump its `?v=` number** in every page that links it (e.g. `css/style.css?v=78` → `?v=79`), or visitors keep the old copy.
 
 ## Analytics (Google Analytics 4)
-Open `js/analytics.js` and replace `G-XXXXXXXXXX` with your Measurement ID (Google Analytics > Admin > Data streams > your web stream). Then bump `js/analytics.js?v=1` to `?v=2` in every page.
+Open `js/analytics.js` and replace `G-XXXXXXXXXX` with your Measurement ID (Google Analytics > Admin > Data streams > your web stream). Then bump the `js/analytics.js?v=` number in every page.
 Until then nothing is tracked and no cookie banner appears. Once the ID is in:
 - Visitors see a cookie banner and analytics only starts if they press **Accept** (Google Consent Mode).
 - "Cookie settings" in the footer reopens the banner.
@@ -76,7 +78,7 @@ python3 tools/set-domain.py https://www.your-domain.org
 It adds canonical links and full share-image URLs to every page, sets the organisation URL for Google, writes `sitemap.xml` and adds it to `robots.txt`. Then submit `https://www.your-domain.org/sitemap.xml` in Google Search Console.
 
 ## Built in
-- Favicon, app icons and `site.webmanifest` (icon made from the logo figure)
+- Favicon and home-screen bookmark icon (made from the logo figure)
 - Link previews for WhatsApp, Facebook, LinkedIn and X (`images/share.jpg`)
 - Organisation details for Google search (JSON-LD on the home page)
 - `robots.txt`, `404.html`, privacy policy, skip-to-content link for keyboard users

@@ -34,7 +34,7 @@ const banner = () => {
   b.className = 'consent';
   b.setAttribute('role', 'dialog');
   b.setAttribute('aria-label', 'Cookie consent');
-  b.innerHTML = `<p>We use cookies to understand how people use our site so we can improve it. <a href="privacy.html">Privacy policy</a></p>
+  b.innerHTML = `<p>We use cookies to understand how people use our site so we can improve it. <a href="privacy">Privacy policy</a></p>
     <div class="consent-btns"><button type="button" class="consent-no">Decline</button><button type="button" class="consent-yes">Accept</button></div>`;
   document.body.appendChild(b);
   requestAnimationFrame(() => b.classList.add('show'));
@@ -60,7 +60,7 @@ document.addEventListener('click', e => {
   if (!a) return;
   const href = a.getAttribute('href') || '';
   const label = a.textContent.trim().slice(0, 60);
-  if (href.startsWith('donate.html')) track('donate_click', { link_text: label, page: location.pathname });
+  if (href.startsWith('donate')) track('donate_click', { link_text: label, page: location.pathname });
   else if (href.startsWith('mailto:')) track('contact', { method: 'email', link_text: label });
   else if (href.startsWith('tel:')) track('contact', { method: 'phone', link_text: label });
   else if (href.includes('wa.me')) track('contact', { method: 'whatsapp', link_text: label });
