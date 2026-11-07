@@ -1147,6 +1147,8 @@ header.nav.scrolled{box-shadow:0 10px 30px -22px rgba(20,33,23,.5)}
 .person::before{content:"";position:absolute;left:50%;top:0;width:calc(100% + 34px);aspect-ratio:1/1;transform:translate(-50%,-17px) rotate(0deg);border-radius:50%;border:2px dashed rgba(141,184,74,.45);transition:transform 1.2s ease;pointer-events:none}
 .person:hover::before{transform:translate(-50%,-17px) rotate(90deg)}
 .person figcaption{margin-top:26px}
+/* Initials stand in until a portrait is available */
+.person-initials{display:grid;place-items:center;background:var(--forest);color:var(--lime);font-family:'Fraunces',serif;font-size:4rem;font-weight:700;letter-spacing:.04em}
 
 @media (max-width:760px){
   .ab-vm-grid{grid-template-columns:1fr;width:calc(100% - 32px)}
